@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.0</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>ed9443cee29c460e8db6e97dfed7131c</uuid>
+            <template>Template Rockpi 4</template>
+            <name>Template Rockpi 4</name>
+            <description>Template for a Rockpi 4 to monitor parameters</description>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>be6838bce02b4a369f2a4a3dcb34d27c</uuid>
+                    <name>RockpiFCPU-0</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu0]</key>
+                    <history>90d</history>
+                </item>
+                <item>
+                    <uuid>65b90b908a82419493f32591df13ef6b</uuid>
+                    <name>RockpiFCPU-1</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu1]</key>
+                    <history>90d</history>
+                </item>
+                <item>
+                    <uuid>af9423cc48424724bf7c0dce09f6415e</uuid>
+                    <name>RockpiFCPU-2</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu2]</key>
+                    <history>90d</history>
+                </item>
+                <item>
+                    <uuid>d49a40035efe4680a98aa3fb5617dd67</uuid>
+                    <name>RockpiFCPU-3</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu3]</key>
+                    <history>90d</history>
+                </item>
+                <item>
+                    <uuid>11da20fdc39147ee9fbec2bc7c68aa2f</uuid>
+                    <name>RockpiFCPU-4</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu4]</key>
+                    <history>90d</history>
+                </item>
+                <item>
+                    <uuid>d26c4817747d42ecabe04e8aad8b5da7</uuid>
+                    <name>RockpiFCPU-5</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>cpufreq[cpu5]</key>
+                    <history>90d</history>
+                </item>
+                <item>
+                    <uuid>3f8813c06b404b9c922e0d64a8c24ee2</uuid>
+                    <name>RockpiTCPU</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>rockpi[cpu]</key>
+                    <history>90d</history>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.cpu_thermal_virtual_0.temp1.temp1_input</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <uuid>41920fd1b8e844e2bb903a7d97cc3f3d</uuid>
+                            <expression>last(/Template Rockpi 4/rockpi[cpu])&gt;=85</expression>
+                            <name>Rockpi CPU Critical Overheating</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                        <trigger>
+                            <uuid>7b1523c67b32400093ed6f765d308548</uuid>
+                            <expression>last(/Template Rockpi 4/rockpi[cpu])&gt;=65</expression>
+                            <name>Rockpi CPU Overheating &gt;=65</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>de0a6f57cb994501af78f32d2a32857f</uuid>
+                    <name>RockpiTGPU</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>rockpi[gpu]</key>
+                    <history>90d</history>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.gpu_thermal_virtual_0.temp1.temp1_input</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <uuid>42d1f7c3050b4c4bbfaf383188e07845</uuid>
+                            <expression>last(/Template Rockpi 4/rockpi[gpu])&gt;=80</expression>
+                            <name>Rockpi GPU Overheating &gt;= 80 degrees</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>3751e8e6bf91484c8f8d9655d4e7de8d</uuid>
+                    <name>RockpiTNVMECrit</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>rockpi[nvmecrit]</key>
+                    <history>90d</history>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.nvme_pci_0100.Composite.temp1_crit</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <uuid>7644d3035f614b8e8d365d2901e12207</uuid>
+                    <name>RockpiTNVME</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>rockpi[nvme]</key>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.nvme_pci_0100.Composite.temp1_input</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <uuid>dcc4d53edb4f45688f421144d3b88da2</uuid>
+            <expression>last(/Template Rockpi 4/rockpi[nvme])&gt;=last(/Template Rockpi 4/rockpi[nvmecrit])</expression>
+            <name>Rockpi NVME Critical Overheating</name>
+            <priority>HIGH</priority>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <uuid>d6a9935508044426950f79fa3ed0b06c</uuid>
+            <name>Rockpi CPU Frequency</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Rockpi 4</host>
+                        <key>cpufreq[cpu0]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>274482</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Rockpi 4</host>
+                        <key>cpufreq[cpu1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Rockpi 4</host>
+                        <key>cpufreq[cpu2]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>2774A4</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Rockpi 4</host>
+                        <key>cpufreq[cpu3]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>A54F10</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Rockpi 4</host>
+                        <key>cpufreq[cpu4]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>FC6EA3</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Rockpi 4</host>
+                        <key>cpufreq[cpu5]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>855ee718b4314432b5f6f5c80c028689</uuid>
+            <name>Rockpi CPU Temperature</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Rockpi 4</host>
+                        <key>rockpi[cpu]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>274482</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Rockpi 4</host>
+                        <key>rockpi[nvmecrit]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>6249f2fe258243fa9dfc1bceec0b0b7c</uuid>
+            <name>Rockpi GPU Temperature</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Template Rockpi 4</host>
+                        <key>rockpi[gpu]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
